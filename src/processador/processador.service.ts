@@ -20,11 +20,13 @@ export class ProcessadorService {
     const sns = JSON.parse(message.Body);
     const msgSns = JSON.parse(sns.Message);
 
+    const pedido = msgSns.pedido
+
     // TODO: salvar pedido no dynamodb
-    this.logger.log(` ----> Novo pedido recebido: ${msgSns.pedido}`);
+    this.logger.log(`== Novo pedido: ${pedido}`);
 
     // TODO: processar pedido (ex: enviar email, notificar garçom, etc.)
 
-    this.logger.debug('Mensagem processada.');
+    this.logger.debug(`Mensagem processada. Pedido: ${pedido}`);
   }
 }
