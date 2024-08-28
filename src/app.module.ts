@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProcessadorModule } from './processador/processador.module';
 import config from './config';
 import { SQSClient } from '@aws-sdk/client-sqs';
+import { PedidoModule } from './pedido/pedido.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { SQSClient } from '@aws-sdk/client-sqs';
       inject: [ConfigService],
     }),
     ProcessadorModule,
+    PedidoModule,
   ],
   controllers: [AppController],
   providers: [AppService, ProcessadorService],
