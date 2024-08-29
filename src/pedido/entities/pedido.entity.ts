@@ -4,6 +4,7 @@ export class Pedido {
   pedidoId: string;
   nome: string;
   telefone: string;
+  dataPedido: Date;
 
   static newInstanceFromDynamoDB(data: any): Pedido {
     return Pedido.getResult(data);
@@ -19,6 +20,7 @@ export class Pedido {
     result.pedidoId = data.pedidoId;
     result.nome = data.nome;
     result.telefone = data.telefone;
+    result.dataPedido = new Date();
 
     return result;
   }
