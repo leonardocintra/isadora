@@ -1,6 +1,7 @@
 import { CreatePedidoDto } from "../dto/create-pedido.dto";
 
 export class Pedido {
+  restaurante: string;
   pedidoId: string;
   nome: string;
   telefone: string;
@@ -17,6 +18,7 @@ export class Pedido {
   private static getResult(data: CreatePedidoDto) {
     const result = new Pedido();
 
+    result.restaurante = data.restaurante;
     result.pedidoId = data.pedidoId;
     result.nome = data.nome;
     result.telefone = data.telefone;

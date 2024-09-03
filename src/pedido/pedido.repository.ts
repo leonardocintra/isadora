@@ -62,6 +62,9 @@ export class PedidoRepository {
 
   async upsertOne(data: Pedido) {
     const itemObject: Record<string, AttributeValue> = {
+      restaurante: {
+        S: data.restaurante,
+      },
       pedidoId: {
         S: data.pedidoId,
       },

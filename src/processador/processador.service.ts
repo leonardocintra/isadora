@@ -28,11 +28,13 @@ export class ProcessadorService {
     const pedido = msgSns.pedido;
     const nome = msgSns.nome;
     const telefone = msgSns.telefone;
+    const restaurante = msgSns.restaurante;
 
     // TODO: salvar pedido no dynamodb
     this.logger.log(`== Novo pedido: ${pedido}`);
 
     const pedidoDto: CreatePedidoDto = {
+      restaurante,
       pedidoId: pedido,
       nome,
       telefone,
