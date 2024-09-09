@@ -2,7 +2,9 @@
 
 ## Description
 
-Salvar pedidos no banco dynamoDB
+- Salvar pedidos no banco dynamoDB
+- Avisar via webSocket que um pedido novo foi criado
+
 
 ## Installation
 

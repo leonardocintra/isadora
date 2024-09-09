@@ -3,15 +3,22 @@ import { CreatePedidoDto } from "./dto/create-pedido.dto";
 import { UpdatePedidoDto } from "./dto/update-pedido.dto";
 import { PedidoRepository } from "./pedido.repository";
 import { Pedido } from "./entities/pedido.entity";
+import { PedidoSocket } from "./pedido.socket";
 
 @Injectable()
 export class PedidoService {
-  constructor(private readonly pedidoRepository: PedidoRepository) {}
+  constructor(
+    private readonly pedidoRepository: PedidoRepository,
+    private readonly socket: PedidoSocket,
+  ) { }
 
-  create(createPedidoDto: CreatePedidoDto) {
-    return this.pedidoRepository.upsertOne(
+  async create(createPedidoDto: CreatePedidoDto) {
+    const pedido = await this.pedidoRepository.upsertOne(
       Pedido.newInstanceFromDTO(createPedidoDto),
     );
+
+    this.socket.avisarNovoPedidoGerado(pedido);
+    return pedido;
   }
 
   findAll() {

@@ -1,5 +1,5 @@
 import { Message } from "@aws-sdk/client-sqs";
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { SqsMessageHandler } from "@ssut/nestjs-sqs";
