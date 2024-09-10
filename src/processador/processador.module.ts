@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { PedidoModule } from 'src/pedido/pedido.module';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { PedidoModule } from "src/pedido/pedido.module";
 
 @Module({
-  imports: [ConfigModule, PedidoModule]
+  imports: [ConfigModule, PedidoModule],
 })
-export class ProcessadorModule { }
+export class ProcessadorModule {}

@@ -10,7 +10,7 @@ export class PedidoService {
   constructor(
     private readonly pedidoRepository: PedidoRepository,
     private readonly socket: PedidoSocket,
-  ) { }
+  ) {}
 
   async create(createPedidoDto: CreatePedidoDto) {
     const pedido = await this.pedidoRepository.upsertOne(

@@ -13,7 +13,7 @@ export class ProcessadorService {
   constructor(
     private readonly configService: ConfigService,
     private readonly pedidoService: PedidoService,
-  ) { }
+  ) {}
 
   @Cron(CronExpression.EVERY_10_HOURS)
   handleCron() {
@@ -38,9 +38,9 @@ export class ProcessadorService {
       pedidoId: pedido,
       nome,
       telefone,
-    }
+    };
 
-    await this.pedidoService.create(pedidoDto)
+    await this.pedidoService.create(pedidoDto);
 
     // TODO: processar pedido (ex: enviar email, notificar garçom, etc.)
 
