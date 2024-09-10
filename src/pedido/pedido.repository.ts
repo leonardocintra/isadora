@@ -77,6 +77,9 @@ export class PedidoRepository {
       dataPedido: {
         S: data.dataPedido.toLocaleString("pt-BR"),
       },
+      items: {
+        SS: data.items
+      }
     };
 
     const command = new PutItemCommand({

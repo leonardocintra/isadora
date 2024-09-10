@@ -13,10 +13,11 @@ export class ProcessadorService {
   constructor(
     private readonly configService: ConfigService,
     private readonly pedidoService: PedidoService,
-  ) {}
+  ) { }
 
   @Cron(CronExpression.EVERY_10_HOURS)
   handleCron() {
+    // TODO: excluir pedidos de datas anteriores
     this.logger.debug("Executando processamento...");
   }
 
@@ -29,6 +30,7 @@ export class ProcessadorService {
     const nome = msgSns.nome;
     const telefone = msgSns.telefone;
     const restaurante = msgSns.restaurante;
+    const items = msgSns.items;
 
     // TODO: salvar pedido no dynamodb
     this.logger.log(`== Novo pedido: ${pedido}`);
@@ -38,6 +40,7 @@ export class ProcessadorService {
       pedidoId: pedido,
       nome,
       telefone,
+      items
     };
 
     await this.pedidoService.create(pedidoDto);

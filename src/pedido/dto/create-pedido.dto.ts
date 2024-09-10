@@ -1,4 +1,4 @@
-import { IsNumberString, IsString } from "class-validator";
+import { IsArray, IsNumberString, IsString } from "class-validator";
 
 export class CreatePedidoDto {
   @IsString()
@@ -12,4 +12,7 @@ export class CreatePedidoDto {
 
   @IsNumberString()
   telefone: string;
+
+  @IsArray()
+  items: string[];
 }
