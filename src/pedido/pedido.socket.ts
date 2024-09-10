@@ -10,7 +10,7 @@ import { Pedido } from './entities/pedido.entity';
 
 @WebSocketGateway({
   cors: {
-    origin: ["http://localhost:3000", "https://restaurante-adminsite.ypg4r9.easypanel.host"],
+    origin: "https://restaurante-adminsite.ypg4r9.easypanel.host", //"http://localhost:3000",
     methods: ['GET', 'POST'],
   }
 })
