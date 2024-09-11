@@ -10,6 +10,9 @@ export class CreatePedidoDto {
   @IsString()
   nome: string;
 
+  @IsString()
+  sobrenome: string;
+
   @IsNumberString()
   telefone: string;
 

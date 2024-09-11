@@ -4,6 +4,7 @@ export class Pedido {
   restaurante: string;
   pedidoId: string;
   nome: string;
+  sobrenome: string;
   telefone: string;
   dataPedido: Date;
   items: string[];
@@ -22,6 +23,7 @@ export class Pedido {
     result.restaurante = data.restaurante;
     result.pedidoId = data.pedidoId;
     result.nome = data.nome;
+    result.sobrenome = data.sobrenome;
     result.telefone = data.telefone;
     result.dataPedido = new Date();
     result.items = data.items;

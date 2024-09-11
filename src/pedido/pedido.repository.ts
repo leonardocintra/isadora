@@ -71,6 +71,9 @@ export class PedidoRepository {
       nome: {
         S: data.nome,
       },
+      sobrenome: {
+        S: data.sobrenome,
+      },
       telefone: {
         S: data.telefone,
       },

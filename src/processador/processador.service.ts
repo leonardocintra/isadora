@@ -28,6 +28,7 @@ export class ProcessadorService {
 
     const pedido = msgSns.pedido;
     const nome = msgSns.nome;
+    const sobrenome = msgSns.sobrenome;
     const telefone = msgSns.telefone;
     const restaurante = msgSns.restaurante;
     const items = msgSns.items;
@@ -39,6 +40,7 @@ export class ProcessadorService {
       restaurante,
       pedidoId: pedido,
       nome,
+      sobrenome,
       telefone,
       items
     };
