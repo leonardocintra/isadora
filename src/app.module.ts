@@ -9,6 +9,7 @@ import { ProcessadorModule } from "./processador/processador.module";
 import config from "./config";
 import { SQSClient } from "@aws-sdk/client-sqs";
 import { PedidoModule } from "./pedido/pedido.module";
+import { SnsModule } from './sns/sns.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { PedidoModule } from "./pedido/pedido.module";
     }),
     ProcessadorModule,
     PedidoModule,
+    SnsModule,
   ],
   controllers: [AppController],
   providers: [AppService, ProcessadorService],
