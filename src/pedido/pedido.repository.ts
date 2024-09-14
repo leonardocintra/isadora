@@ -5,13 +5,14 @@ import {
   PutItemCommand,
   ScanCommand,
 } from "@aws-sdk/client-dynamodb";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { Pedido } from "./entities/pedido.entity";
 
 @Injectable()
 export class PedidoRepository {
   private readonly tableName = "pedido";
   private readonly client: DynamoDBClient;
+  private readonly logger: Logger = new Logger(PedidoRepository.name);
 
   constructor() {
     this.client = new DynamoDBClient({
@@ -85,12 +86,16 @@ export class PedidoRepository {
       }
     };
 
-    const command = new PutItemCommand({
-      TableName: this.tableName,
-      Item: itemObject,
-    });
+    try {
+      const command = new PutItemCommand({
+        TableName: this.tableName,
+        Item: itemObject,
+      });
 
-    await this.client.send(command);
-    return data;
+      await this.client.send(command);
+      return data;
+    } catch (err) {
+      this.logger.error("Erro salvar pedido dynamoDB", err, itemObject);
+    }
   }
 }

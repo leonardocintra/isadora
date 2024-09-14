@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { CreatePedidoDto } from "./dto/create-pedido.dto";
 import { UpdatePedidoDto } from "./dto/update-pedido.dto";
 import { PedidoRepository } from "./pedido.repository";
@@ -8,6 +8,9 @@ import { SnsService } from "src/sns/sns.service";
 
 @Injectable()
 export class PedidoService {
+
+  private readonly logger = new Logger(PedidoService.name);
+
   constructor(
     private readonly pedidoRepository: PedidoRepository,
     private readonly socket: PedidoSocket,
@@ -15,18 +18,30 @@ export class PedidoService {
   ) { }
 
   async create(createPedidoDto: CreatePedidoDto) {
-    const pedido = await this.pedidoRepository.upsertOne(
-      Pedido.newInstanceFromDTO(createPedidoDto),
-    );
+    try {
 
-    this.socket.avisarNovoPedidoGerado(pedido);
+      if (createPedidoDto.items.length < 1) {
+        this.logger.warn(`O pedido ${createPedidoDto.pedidoId} do restuarante ${createPedidoDto.restaurante} sera descartado pois não teve itens`);
+        // TODO: cancelar o pedido
+        return null;
+      }
 
-    await this.snsService.publishMessage(JSON.stringify(pedido), {
-      PedidoId: pedido.pedidoId,
-      StatusId: 2
-    });
+      const pedido = await this.pedidoRepository.upsertOne(
+        Pedido.newInstanceFromDTO(createPedidoDto),
+      );
 
-    return pedido;
+      this.socket.avisarNovoPedidoGerado(pedido);
+
+      await this.snsService.publishMessage(JSON.stringify(pedido), {
+        PedidoId: pedido.pedidoId,
+        StatusId: 2
+      });
+
+      return pedido;
+    } catch (error) {
+      console.error('Error ao cadastrar pedido:', error);
+      throw error;
+    }
   }
 
   findAll() {
