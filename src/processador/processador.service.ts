@@ -46,9 +46,6 @@ export class ProcessadorService {
     };
 
     await this.pedidoService.create(pedidoDto);
-
-    // TODO: processar pedido (ex: enviar email, notificar garçom, etc.)
-
     this.logger.log(`Mensagem Ok. Pedido: ${pedido}`);
   }
 }
